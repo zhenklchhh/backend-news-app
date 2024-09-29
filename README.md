@@ -14,11 +14,11 @@
 - Система тегирования новостей
 
 # Стек используемых технологий
-• Trello
-• Java
-• Figma
-• PostgreSQL
-• Android Studio
-• Flutter
+- Trello
+- Java
+- Figma
+- PostgreSQL
+- Android Studio
+- Flutter
 
 # ER-диаграмма базы данных
