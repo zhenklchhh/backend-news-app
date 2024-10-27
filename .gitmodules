@@ -1,0 +1,3 @@
+[submodule "backend-news"]
+	path = backend-news
+	url = https://github.com/zhenklchhh/backend-news
