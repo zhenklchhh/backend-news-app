@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: EzioNews
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/backend_news_war_exploded/
+    description: backend server
+paths:
+  /users:
+    get:
+      summary: Get all users
+      tags: 
+       - User
+      operationId: GetAllUsers
+      security:
+        - JWTAuthentication: [User]
+      responses:
+        '200': 
+          description: Command run succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '400':
+          description: Command failed
+    post:
+      summary: add User
+      tags:
+       - User
+      operationId: PostUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '200': 
+          description: Command run succesfully
+        '400':
+          description: Command failed
+  /users/{id}:
+    put:
+      summary: change User
+      tags:
+       - User
+      operationId: PutUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '200': 
+          description: Command run succesfully
+        '400':
+          description: Command failed
+        '404':
+          description: Not Found
+    delete:
+      summary: delete User
+      tags:
+       - User
+      operationId: DeleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        '200': 
+          description: Command run succesfully
+        '400':
+          description: Command failed
+        '404':
+          description: Not Found
+    get:
+      summary: Get user by id
+      tags: 
+       - User
+      operationId: GetUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 1
+      security:
+        - JWTAuthentication: [User]
+      responses:
+        '200': 
+          description: Command run succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '400':
+          description: Command failed
+        '404':
+          description: Not Found
+  /registration:
+    post:
+      summary: register User
+      tags:
+       - Registration
+      operationId: RegisterUser
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      responses:
+        '200': 
+          description: Command run succesfully
+          content:
+            application/json:
+              schema:
+                type: string
+              example: {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwIiwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwODBcL2JhY2tlbmRfbmV3c193YXJfZXhwbG9kZWQiLCJleHAiOjE3MzA2NjU5NzA0ODF9.rJ9dzFOauJdXtJnr8S85lwEH3doDLtAvPPqU_KzHELo"
+}
+        '400':
+          description: Command failed
+    
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - name
+        - password
+        - email
+      properties:
+        name:
+          type: string
+          example: Danik
+        password:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: g1234@gmail.com
+  securitySchemes:
+   JWTAuthentication:
+      description: Bearer token using a JWT
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+      
